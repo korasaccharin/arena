@@ -1,28 +1,9 @@
+<?php
 
-
-/**
- * class IShield
- * 
+/*
+ * Interface IShield
  */
-class IShield
-{
 
-  /** Aggregations: */
+Interface IShield {}
 
-  /** Compositions: */
-
-   /*** Attributes: ***/
-
-  /**
-   * 
-   * @access private
-   */
-  private $defense;
-
-
-
-
-
-
-} // end of IShield
 ?>

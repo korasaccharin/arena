@@ -1,6 +1,6 @@
+<?php
 
-
-/**
+/*
  * class Kit
  * 
  */
@@ -19,6 +19,18 @@ abstract class Kit
    * 
    * @access private
    */
+  private $attack;
+
+  /**
+   * 
+   * @access private
+   */
+  private $defense;
+
+  /**
+   * 
+   * @access private
+   */
   private $ID;
 
   /**
@@ -32,7 +44,6 @@ abstract class Kit
    * @access private
    */
   private $cost;
-
 
 
 

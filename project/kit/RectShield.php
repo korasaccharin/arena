@@ -1,12 +1,10 @@
-require_once 'IShield.php';
-require_once 'Kit.php';
+<?php
 
-
-/**
+/*
  * class RectShield
- * 
  */
-class RectShield extends IShield  //WARNING: PHP5 does not support multiple inheritance but there is more than 1 superclass defined in your UML model!
+
+class RectShield extends Kit implements IShield
 {
 
   /** Aggregations: */

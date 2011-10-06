@@ -1,13 +1,10 @@
-require_once 'Pièce.php';
-require_once 'Kit.php';
-require_once 'Team.php';
+<?php
 
-
-/**
+/*
  * class Gladiator
- * 
+ *
  */
-class Gladiator extends Pièce
+class Gladiator extends Piece
 {
 
   /** Aggregations: */

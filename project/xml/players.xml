@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<arena>
+    <player>
+        <ID>0</ID>
+        <name>Marais</name>
+        <first_name>Michèle</first_name>
+        <username>mimyy</username>
+        <teams>
+            <team>
+                <ID>0</ID>
+                <name>Fondcombe</name>
+                <description>The powerful elf team</description>
+                <gladiators>
+                    <gladiator>
+                        <ID>0</ID>
+                        <name>Legolas</name>
+                        <kit id="1">Sword</kit>
+                        <kit id="2">LittleShield</kit>
+                        <rank>2</rank>
+                    </gladiator>
+                    <gladiator>
+                        <ID>1</ID>
+                        <name>Gandalf</name>
+                        <rank>3</rank>
+                        <kit id="1">Trident</kit>
+                        <kit id="2">Helmet</kit>
+                    </gladiator>
+                    <gladiator>
+                        <ID>2</ID>
+                        <name>Arwen</name>
+                        <rank>1</rank>
+                        <kit id="1">Knife</kit>
+                        <kit id="2">Spear</kit>
+                    </gladiator>
+                </gladiators>
+            </team>
+        </teams>
+    </player>
+    <player>
+        <ID>1</ID>
+        <name>Tivano</name>
+        <first_name>Ethane</first_name>
+        <username>etivano</username>
+        <teams>
+            <team>
+                <ID>1</ID>
+                <name>Secret</name>
+                <description>A secret team with dreadful powers</description>
+                <gladiators>
+                    <gladiator>
+                        <ID>3</ID>
+                        <name>Ungoliant</name>
+                        <kit id="1">Trident</kit>
+                        <kit id="2">Net</kit>
+                        <rank>1</rank>
+                    </gladiator>
+                    <gladiator>
+                        <ID>4</ID>
+                        <name>Morgoth</name>
+                        <kit id="1">LittleShield</kit>
+                        <kit id="2">Sword</kit>
+                        <rank>2</rank>
+                    </gladiator>
+                    <gladiator>
+                        <ID>5</ID>
+                        <name>Sauron</name>
+                        <kit id="1">RectShield</kit>
+                        <kit id="2">Knife</kit>
+                        <rank>3</rank>
+                    </gladiator>
+                </gladiators>
+            </team>
+        </teams>
+    </player>
+    <player>
+        <ID>2</ID>
+        <name>Blot</name>
+        <first_name>Aline</first_name>
+        <username>kimyo</username>
+        <teams>
+            <team>
+                <ID>2</ID>
+                <name>Nargothrond</name>
+                <description>Elf team from the secret city of Nargothrond</description>
+                <gladiators>
+                    <gladiator>
+                        <ID>6</ID>
+                        <name>Felagund</name>
+                        <kit id="1">Spear</kit>
+                        <kit id="2">Helmet</kit>
+                        <rank>1</rank>
+                    </gladiator>
+                    <gladiator>
+                        <ID>7</ID>
+                        <name>Turgon</name>
+                        <kit id="1">Sword</kit>
+                        <kit id="2">LittleShield</kit>
+                        <rank>3</rank>
+                    </gladiator>
+                    <gladiator>
+                        <ID>8</ID>
+                        <name>Glorfindel</name>
+                        <kit id="1">Knife</kit>
+                        <kit id="2">Helmet</kit>
+                        <kit id="3">Sword</kit>
+                        <rank>2</rank>
+                    </gladiator>
+                </gladiators>
+            </team>
+        </teams>
+    </player>
+    <player>
+        <ID>3</ID>
+        <name>Fernandez</name>
+        <first_name>Laura</first_name>
+        <username>lora</username>
+        <teams>
+            <team>
+                <ID>3</ID>
+                <name>Arthedain</name>
+                <description>Humans team from northern countries</description>
+                <gladiators>
+                    <gladiator>
+                        <ID>9</ID>
+                        <name>Beren</name>
+                        <kit id="1">Trident</kit>
+                        <kit id="2">Net</kit>
+                        <rank>3</rank>
+                    </gladiator>
+                    <gladiator>
+                        <ID>10</ID>
+                        <name>Barahir</name>
+                        <kit id="1">Knife</kit>
+                        <kit id="2">RectShield</kit>
+                        <rank>1</rank>
+                    </gladiator>
+                    <gladiator>
+                        <ID>11</ID>
+                        <name>Luthien</name>
+                        <kit id="1">LittleShield</kit>
+                        <kit id="2">Sword</kit>
+                        <rank>2</rank>
+                    </gladiator>
+                </gladiators>
+            </team>
+        </teams>
+    </player>
+</arena>

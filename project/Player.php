@@ -1,4 +1,4 @@
-
+<?php
 
 /**
  * class Player
@@ -7,40 +7,53 @@
 class Player
 {
 
-  /** Aggregations: */
-
-  /** Compositions: */
-
-   /*** Attributes: ***/
-
   /**
    * 
-   * @access private
+   * @access public
    */
-  private $ID;
+  public $ID;
 
-  /**
-   * 
-   * @access private
+  /*
+   * @access public
+   *
    */
-  private $name;
+  public $name;
 
-  /**
-   * 
-   * @access private
+  /*
+   * @access public
+   *
    */
-  private $first_name;
+  public $first_name;
 
-  /**
-   * 
-   * @access private
+  /*
+   * @access public
+   *
    */
-  private $username;
+  public $username;
 
+  /*
+   * @access public
+   *
+   */
+  public static $nbPlayers = 0;
 
+  public function __construct($name, $first_name, $username, $teams) {
+    $this->name = $name;
+    $this->first_name = $first_name;
+    $this->username = $username;
 
+    Player::$nbPlayers++;
 
+    foreach ($teams as $team) {
+      $this->createTeam($team);
+    }
+  }
 
-
-} // end of Player
+  public function createTeam($team) {
+    $team = new Team(
+      $team['name'],
+      $team['description']
+    );
+  }
+}
 ?>

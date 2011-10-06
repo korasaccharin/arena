@@ -1,12 +1,11 @@
-require_once 'Kit.php';
-require_once 'IWeapon.php';
+<?php
 
-
-/**
+/*
  * class Knife
- * 
+ *
  */
-class Knife extends Kit  //WARNING: PHP5 does not support multiple inheritance but there is more than 1 superclass defined in your UML model!
+
+class Knife extends Kit implements IWeapon
 {
 
   /** Aggregations: */

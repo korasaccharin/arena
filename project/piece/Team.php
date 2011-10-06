@@ -1,24 +1,34 @@
-require_once 'Pièce.php';
-require_once 'Gladiator.php';
-require_once 'Player.php';
+<?php
 
-
-/**
+/*
  * class Team
  * 
  */
-class Team extends Pièce
+class Team extends Piece
 {
 
-  /** Aggregations: */
+  /*
+   * @access public
+   *
+   */
+  public static $nbTeams = 0;
 
-  /** Compositions: */
 
-   /*** Attributes: ***/
+  /*
+   * @access public
+   *
+   */
+  public $ID;
 
-  /**
-   * 
+  /*
+   * @access public
+   *
+   */
+  public $name;
+
+  /*
    * @access private
+   *
    */
   private $description;
 
