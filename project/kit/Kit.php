@@ -1,53 +1,35 @@
 <?php
 
-/*
- * class Kit
- * 
- */
 abstract class Kit
 {
+  public static $nbKits = 0;
 
-  /** Aggregations: */
+  protected $ID;
+  protected $label;
+  protected $cost;
+  protected $attack = 0;
+  protected $defense = 0;
 
-  var $m_;
-
-  /** Compositions: */
-
-   /*** Attributes: ***/
-
-  /**
-   * 
-   * @access private
-   */
-  private $attack;
-
-  /**
-   * 
-   * @access private
-   */
-  private $defense;
-
-  /**
-   * 
-   * @access private
-   */
-  private $ID;
-
-  /**
-   * 
-   * @access private
-   */
-  private $label;
-
-  /**
-   * 
-   * @access private
-   */
-  private $cost;
-
-
-
-
-
-} // end of Kit
+  public function __construct() {
+    $this->ID = Kit::$nbKits;
+    Kit::$nbKits++;
+  }
+  public function askChance($force) {
+    $chance = mt_rand(0, 100);
+    if ($force <= $chance) return true;
+    else return false;
+  }
+  public function wound() {
+    return $this->askChance($this->attack);
+  }
+  public function block() {
+    return $this->askChance($this->defense);
+  }
+  public function getCost() {
+    return $this->cost;
+  }
+  public function getLabel() {
+    return $this->label;
+  }
+}
 ?>

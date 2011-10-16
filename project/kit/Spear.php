@@ -1,23 +1,9 @@
 <?php
 
-/*
- * class Spear
- *
- */
-
 class Spear extends Kit implements IWeapon
 {
-
-  /** Aggregations: */
-
-  /** Compositions: */
-
-   /*** Attributes: ***/
-
-
-
-
-
-
-} // end of Spear
+  protected $label = "spear";
+  protected $cost = 7;
+  protected $attack = 50;
+}
 ?>

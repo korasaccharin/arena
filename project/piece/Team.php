@@ -1,94 +1,82 @@
 <?php
-
-/*
- * class Team
- * 
- */
 class Team extends Piece
 {
-
-  /*
-   * @access public
-   *
-   */
   public static $nbTeams = 0;
 
-
-  /*
-   * @access public
-   *
-   */
-  public $ID;
-
-  /*
-   * @access public
-   *
-   */
-  public $name;
-
-  /*
-   * @access private
-   *
-   */
   private $description;
-
-  /**
-   * 
-   * @access private
-   */
-  private $player;
-
-  /**
-   * Tableau de type Gladiator
-   * 
-   * @access private
-   */
   private $gladiators;
 
+  public function __construct($name, $description, $gladiators) {
+    parent::__construct(Team::$nbTeams, $name);
 
-  /**
-   * Renvoie gladiators
-   *
-   * @return array
-   * @access public
-   */
+    $this->description = $description;
+    Team::$nbTeams++;
+
+    foreach ($gladiators as $gladiator) {
+      $this->createGladiator($gladiator);
+    }
+    //var_dump($this->gladiators);
+  }
+
   public function getGladiators( ) {
-  } // end of member function getGladiators
+    $this->sortByRank();
+    return $this->gladiators;
+  }
 
-  /**
-   * 
-   *
-   * @param array ranks [ID Gladiator] => rank
+  public function getFirstLivingGladiator() {
+    foreach ($this->gladiators as $gladiator) {
+      if ($gladiator->isLiving()) return $gladiator;
+    }
+    return null;
+  }
 
-   * @return 
-   * @access public
-   */
-  public function orderGladiators( $ranks ) {
-  } // end of member function orderGladiators
+  public function orderGladiators( $ranks ) {//$ranks = ID + Rank
+    for($i=0; $i < count($ranks);$i++) {
+      for($cpt=0;$cpt=count($this->gladiators);$cpt++) {
+        if($ranks[$i] == $this->gladiators[$cpt]->getId()) {
+          $this->setRank($ranks[$i]->rank);
+        }
+      }
+    }
+  }
 
-  /**
-   * 
-   *
-   * @param string name 
+  public function sortByRank()
+  {
+    for($i=0;$i<count($this->gladiators);$i++){
+      for($u=0;$u<count($this->gladiators);$u++){
+        $rank1 = $this->gladiators[$i]->getRank();
+        $rank2 = $this->gladiators[$u]->getRank();
+        if($rank1 < $rank2){
+          $temp=$this->gladiators[$i];
+          $this->gladiators[$i]=$this->gladiators[$u];
+          $this->gladiators[$u]=$temp;
+        }
+      }
+    }
+  }
 
-   * @return Gladiator
-   * @access public
-   */
-  public function addGladiator( $name ) {
-  } // end of member function addGladiator
+  public function createGladiator($gladiator) {
 
-  /**
-   * 
-   *
-   * @return 
-   * @access public
-   */
+    $gladiator = new Gladiator(
+      $gladiator['name'],
+      $gladiator['kit'],
+      $gladiator['rank']
+    );
+    $this->gladiators[] = $gladiator;
+  }
+  public function resuscitate() {
+    parent::resuscitate();
+
+    foreach ($this->gladiators as $gladiator) {
+      $gladiator->resuscitate();
+    }
+  }
+
+  public function addGladiator($gladiator) {
+    $this->gladiators[] = new Gladiator($gladiator['name']);
+  }
+
   public function engage( ) {
-  } // end of member function engage
-
-
-
-
-
-} // end of Team
+  }
+}
 ?>

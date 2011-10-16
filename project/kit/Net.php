@@ -1,23 +1,9 @@
 <?php
 
-/*
- * class Net
- *
- */
-
 class Net extends Kit implements IWeapon
 {
-
-  /** Aggregations: */
-
-  /** Compositions: */
-
-   /*** Attributes: ***/
-
-
-
-
-
-
-} // end of Net
+  protected $label = "net";
+  protected $cost = 3;
+  protected $attack = 30;
+}
 ?>

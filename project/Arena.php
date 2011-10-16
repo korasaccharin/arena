@@ -2,7 +2,6 @@
 
 /*
  * Includes
- *
  */
 
 require_once 'DataManager.php';
@@ -30,16 +29,12 @@ require_once 'competition/Battle.php';
 require_once 'competition/Round.php';
 
 /*
- * class Arena
- *
+ * Arena
  */
 
 class Arena
 {
-
-  /*
-   * @access private
-   */
+  private $players;
   private $fighters;
 
   public function __construct() {
@@ -50,27 +45,18 @@ class Arena
     // XXX les joueurs devraient s'engager seuls
     // cf design pattern observeur / observable
     $this->engagePlayers();
-
     $this->startCompetition();
   }
 
   public function __destruct() {
   }
 
-  /*
-   * @return array
-   * @access private
-   */
   private function getData() {
     $data = DataManager::getData();
     return $data;
   }
 
-  /*
-   * @access private
-   */
   private function createPlayers($dataPlayers) {
-    $nbPlayers = sizeof($dataPlayers);
     foreach ($dataPlayers as $dataPlayer) {
       $player = new Player(
         $dataPlayer['name'],
@@ -78,28 +64,28 @@ class Arena
         $dataPlayer['username'],
         $dataPlayer['teams']
       );
+      $this->players[] = $player;
     }
   }
 
-  /*
-   * @access private
-   */
   private function engagePlayers() {
+    foreach ($this->players as $player) {
+      if ($player->isCombatant()) {
+        $this->fighters[] = $player->getTeamFighter();
+      }
+    }
   }
 
-  /*
-   * @return
-   * @access public
-   */
-  public function startCompetition( ) {
+  public function startCompetition() {
+    $competition = new Competition($this->fighters);
   }
 
-  /*
-   *
-   * @return 
-   * @access public
-   */
   public function addPlayer( ) {
+  }
+  public function giveMiracleDrug() {
+    foreach ($this->fighters as $fighter) {
+      $fighter->resuscitate();
+    }
   }
 
   /**
@@ -113,5 +99,5 @@ class Arena
   public function addFighter( $team ) {
   }
 
-} // end of Arena
+}
 ?>

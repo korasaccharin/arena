@@ -1,22 +1,10 @@
 <?php
 
-/*
- * class Trident
- */
-
 class Trident extends Kit implements IWeapon, IShield
 {
-
-  /** Aggregations: */
-
-  /** Compositions: */
-
-   /*** Attributes: ***/
-
-
-
-
-
-
-} // end of Trident
+  protected $label = "trident";
+  protected $cost = 7;
+  protected $attack = 40;
+  protected $defense = 10;
+}
 ?>

@@ -1,21 +1,9 @@
 <?php
 
-/*
- * class LittleShield
- */
 class LittleShield extends Kit implements IShield
 {
-
-  /** Aggregations: */
-
-  /** Compositions: */
-
-   /*** Attributes: ***/
-
-
-
-
-
-
-} // end of LittleShield
+  protected $label = "littleshield";
+  protected $cost = 5;
+  protected $defense = 20;
+}
 ?>

@@ -1,46 +1,22 @@
 <?php
 
-/**
- * class Player
- * 
- */
 class Player
 {
+  public static $nbPlayers = 0;
 
-  /**
-   * 
-   * @access public
-   */
   public $ID;
-
-  /*
-   * @access public
-   *
-   */
   public $name;
-
-  /*
-   * @access public
-   *
-   */
   public $first_name;
-
-  /*
-   * @access public
-   *
-   */
   public $username;
 
-  /*
-   * @access public
-   *
-   */
-  public static $nbPlayers = 0;
+  private $combatant = true;
+  private $teams;
 
   public function __construct($name, $first_name, $username, $teams) {
     $this->name = $name;
     $this->first_name = $first_name;
     $this->username = $username;
+    $ID = Player::$nbPlayers;
 
     Player::$nbPlayers++;
 
@@ -52,8 +28,17 @@ class Player
   public function createTeam($team) {
     $team = new Team(
       $team['name'],
-      $team['description']
+      $team['description'],
+      $team['gladiators']['gladiator']
     );
+    $this->teams[] = $team;
+  }
+  public function isCombatant() {
+    return $this->combatant;
+  }
+  public function getTeamFighter() {
+    // $this->teams[mt_rand(0,3)];
+    return $this->teams[0];
   }
 }
 ?>

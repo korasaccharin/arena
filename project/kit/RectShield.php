@@ -1,22 +1,9 @@
 <?php
 
-/*
- * class RectShield
- */
-
 class RectShield extends Kit implements IShield
 {
-
-  /** Aggregations: */
-
-  /** Compositions: */
-
-   /*** Attributes: ***/
-
-
-
-
-
-
-} // end of RectShield
+  protected $label = "rectshield";
+  protected $cost = 8;
+  protected $defense = 30;
+}
 ?>
