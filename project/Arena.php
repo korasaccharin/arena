@@ -24,6 +24,10 @@ require_once 'kit/LittleShield.php';
 require_once 'kit/Knife.php';
 require_once 'kit/Net.php';
 
+require_once 'interface/IObservable.php';
+require_once 'interface/IObserver.php';
+
+require_once 'competition/Duel.php';
 require_once 'competition/Competition.php';
 require_once 'competition/Battle.php';
 require_once 'competition/Round.php';
@@ -32,72 +36,66 @@ require_once 'competition/Round.php';
  * Arena
  */
 
-class Arena
+class Arena implements IObserver
 {
-  private $players;
-  private $fighters;
+    private $players;
+    private $fighters;
 
-  public function __construct() {
-    $dataPlayers = $this->getData();
+    public function __construct() {
+        $dataPlayers = $this->getData();
 
-    $this->createPlayers($dataPlayers);
-
-    // XXX les joueurs devraient s'engager seuls
-    // cf design pattern observeur / observable
-    $this->engagePlayers();
-    $this->startCompetition();
-  }
-
-  public function __destruct() {
-  }
-
-  private function getData() {
-    $data = DataManager::getData();
-    return $data;
-  }
-
-  private function createPlayers($dataPlayers) {
-    foreach ($dataPlayers as $dataPlayer) {
-      $player = new Player(
-        $dataPlayer['name'],
-        $dataPlayer['first_name'],
-        $dataPlayer['username'],
-        $dataPlayer['teams']
-      );
-      $this->players[] = $player;
+        $this->createPlayers($dataPlayers);
     }
-  }
 
-  private function engagePlayers() {
-    foreach ($this->players as $player) {
-      if ($player->isCombatant()) {
+    public function __destruct() {}
+
+        private function getData() {
+            $data = DataManager::getData();
+            return $data;
+        }
+
+    private function createPlayers($dataPlayers) {
+        foreach ($dataPlayers as $dataPlayer) {
+            $player = new Player(
+                $dataPlayer['name'],
+                $dataPlayer['first_name'],
+                $dataPlayer['username'],
+                $dataPlayer['teams']
+            );
+            $player->register($this);
+            $player->engage();
+            $this->players[] = $player;
+        }
+    }
+
+    public function startCompetition() {
+        $competition = new Competition($this->fighters);
+        $competition->register($this);
+
+        echo "<p>Le tournoi commence </p>";
+        $competition->start();
+    }
+
+    public function addPlayer( ) {}
+
+        public function giveMiracleDrug() {
+            foreach ($this->fighters as $fighter) {
+                $fighter->resuscitate();
+            }
+        }
+
+    public function addFighter($player) {
         $this->fighters[] = $player->getTeamFighter();
-      }
+        $this->frameHandler();
     }
-  }
-
-  public function startCompetition() {
-    $competition = new Competition($this->fighters);
-  }
-
-  public function addPlayer( ) {
-  }
-  public function giveMiracleDrug() {
-    foreach ($this->fighters as $fighter) {
-      $fighter->resuscitate();
+    public function update($IDCompetition) {
+        echo "Fin de la competition";
     }
-  }
 
-  /**
-   * addFighter() est un écouteur d'évènement Player.engage()
-   *
-   * @param Team team 
-
-   * @return 
-   * @access public
-   */
-  public function addFighter( $team ) {
-  }
-
+    private function frameHandler() {
+        if (count($this->fighters) == 4) {
+            $this->startCompetition();
+        }
+    }
 }
 ?>

@@ -1,64 +1,97 @@
 <?php
 
-class Competition
+class Competition extends Duel
 {
+    public static $nbCompetitions = 0;
 
-  private $teams;
-  private $places;
+    private $teams;
+    private $places;
 
-  public function __construct($teams) {
-    $this->teams = $teams;
-    $this->sort();
-    $this->launchBattles();
-  }
+    public function __construct($teams) {
+        $this->ID = Competition::$nbCompetitions;
+        Competition::$nbCompetitions++;
 
-  private function sort() {
-    //Trie les équipes par leur pourcentage
-    $teams = $this->teams;
+        $this->teams = $teams;
+    }
+    public function start() {
+        $this->sort();
+        $this->match();
+        $this->fight();
+    }
 
-    for($i=0;$i<count($teams);$i++){
-      for($u=0;$u<count($teams);$u++){
+    private function sort() {
+        $modification = false;
 
-        $firstTeam = $teams[$i]->getPercent();
-        $secondTeam = $teams[$u]->getPercent();
-
-        if($firstTeam < $secondTeam){
-          $temp=$teams[$i];
-          $teams[$i]=$teams[$u];
-          $teams[$u]=$temp;
+        foreach ($this->teams as $key => $team) {
+            if ($key != 0) {
+                if ($previous->getPercent() < $team->getPercent()) {
+                    $this->team[$key - 1] = $team;
+                    $this->team[$key] = $previous;
+                    $modification = true;
+                }
+            }
+            $previous = $team;
         }
-      }
+        if ($modification) $this->sort();
+        else return true;
     }
-    //classe les équipes par paire
-    for($i=0; $i<count($teams); $i++){
-      if($i%2==0){
-        $this->places[] = array(
-          'team_1'=>$teams[$i],
-          'team_2'=>$teams[$i+1]
-        );
-      }
+    private function match() {
+        foreach ($this->teams as $key => $team) {
+            if ($key % 2) {
+                $this->places[] = array(
+                    'team_1' => $previous,
+                    'team_2' => $team
+                );
+            }
+            $previous = $team;
+        }
     }
-  }
 
-  private function launchBattles() {
-    foreach ($this->places as $pair){
-      new Battle($pair['team_1'], $pair['team_2']);
-      $this->updateTeams($pair);
-    }
-  }
+    private function fight() {
+        echo "Les combats suivant vont avoir lieu : <br />";
 
-  /**
-   * Met à jour les compteurs des équipes
-   * 
-   *
-   * @return 
-   * @access private
-   */
-  private function updateTeams($pair) {
-    foreach ($pair as $team){
-      if ($team->isLiving()) $team->addVictory();
-      else $team->addDefeat();
+        foreach ($this->places as $pair){
+            $battle = new Battle($pair['team_1'], $pair['team_2']);
+
+            $battle->register($this);
+            echo "$battle <br />";
+
+            $this->battles[] = $battle;
+        }
+
+        echo "<p>Commencons les combats</p>";
+
+        foreach ($this->battles as $battle) $battle->start();
     }
-  }
+
+    private function updateTeams($firstTeam, $secondTeam) {
+        if ($firstTeam->isLiving()) {
+            $firstTeam->addVictory();
+            echo "<p>" . $firstTeam->getName() . " gagne le combat.</p>";
+        } else $firstTeam->addDefeat();
+
+        if ($secondTeam->isLiving()) {
+            $secondTeam->addVictory();
+            echo "<p>" . $firstTeam->getName() . " gagne le combat.</p>";
+        } else $secondTeam->addDefeat();
+    }
+    public function stop() {
+        $this->getStatus('END COMPETITION');
+        $this->notify();
+    }
+
+    public function update($IDBattle) {
+        $battle = $this->battles[$IDBattle];
+        if ($battle->getStatus() == 'END BATTLE') {
+            $this->updateTeams(
+                $battle->getFirstTeam(),
+                $battle->getSecondTeam()
+            );
+            unset($this->battles[$IDBattle]);
+        }
+        if (count($this->battles) == 0) {
+            $this->stop();
+        }
+    }
 }
 ?>

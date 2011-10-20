@@ -2,8 +2,8 @@
 
 class RectShield extends Kit implements IShield
 {
-  protected $label = "rectshield";
-  protected $cost = 8;
-  protected $defense = 30;
+    protected $label = "rectshield";
+    protected $cost = 8;
+    protected $defense = 30;
 }
 ?>
